@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <title>Two APIs Partner Lab 2</title>
+    <title>
+      <link rel="stylesheet" type="text/css" href="TwoAPIs.css">
+      Two APIs Partner Lab 2</title>
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="style.css">
   </head>
-  <body>
+  <body id="body">
     <h1>Recipe Search & Calorie Count</h1>
     <br>
 
@@ -15,19 +17,18 @@
     <button id="searchButton" onclick="findRecipe();">GO</button>
     <br>
     <br>
-    <!-- <div
-      <input type="radio" id="recipe"</input>
-    </div> -->
-    <form id="recipeForm" method="post">
-      <fieldset>
-        <legend>Choose a Recipe</legend>
-          <input type="radio" id="radio">
-      </fieldset>
-    </form>
-    <!-- <input type= "submit"> -->
-    <br>
-    <br>
 
+    <legend>Choose a Recipe</legend>
+    <p id="radioButtons"></p>
+
+    <br>
+    <label>Would you like to see Nutritional values?</label>
+    <input type= radio name="yes" id="yes">Yes</input>
+    <input type= radio name="no" id="no">No</input>
+    <button id="choiceButton" onclick="radioChoice();">Submit</button>
+
+    <br>
+    <br>
 
 
     <!--Nutritional API, Dropdown, Table -->
@@ -45,5 +46,7 @@
         <tr id="foodbody"></tr>
       </table>
     <script src="TwoAPIs.js" defer></script>
+    <style src="TwoAPIs.css" defer></style>
+
   </body>
 </html>

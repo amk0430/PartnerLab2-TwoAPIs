@@ -2,3 +2,8 @@ td {
   border:solid;
   padding:5px;
 }
+
+head {
+  color: lightblue;
+  font-size: 20px;
+}

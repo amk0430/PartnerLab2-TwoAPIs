@@ -37,6 +37,20 @@
 // }
 // request.send();
 
+function radioChoice()
+{
+	let yes = document.querySelector("#yes").checked;
+		if (yes)
+		{
+			testFunction();
+		}
+}
+
+function testFunction()
+{
+		console.log("this function works");
+}
+
 function findRecipe()
 {
 	let data = null;
@@ -66,10 +80,15 @@ function findRecipe()
 			{
 				//Recipe
 				console.log(results[i].ingredients);
-				let recipe = document.createElement("form");
+				let recipe = document.createElement("p");
+				// recipe.setAttribute("type", "radio");
+				// recipe.setAttribute("id", "radio");
 				let recipeText = document.createTextNode(results[i].title);
 				recipe.appendChild(recipeText);
-				document.querySelector("#radio").appendChild(recipe);
+				document.querySelector("#radioButtons").appendChild(recipe);
+				// document.querySelector("#radioButtons").appendChild(recipe)
+
+				//console.log(document.querySelector("eco").checked);
 			}
 		}
 		else
