@@ -43,33 +43,35 @@ function findRecipe()
 	let keyword = "apple";
 	let request = new XMLHttpRequest();
 
-	request.open("GET",  "https://recipe-puppy.p.rapidapi.com/?p=1&i=onions%2Cgarlic&q=omelet" + keyword, true);
+	request.open("GET",  "https://recipe-puppy.p.rapidapi.com/?p=1&i=" + keyword, true);
 	request.setRequestHeader("x-rapidapi-host", "recipe-puppy.p.rapidapi.com");
 	request.setRequestHeader("x-rapidapi-key", "636f281abemshf2f10570570279dp10170ajsn3c5b24fe3431");
 
 	//console.log(data);
 	request.onload = function() {
+
 		//console.log(data);
 		data = JSON.parse(this.response);
 
-		if (request.status == 200)
-		{
-			data.forEach(results=>{console.log(results.ingredients)};)
-		}
 		// if (request.status == 200)
 		// {
-		// 	console.log(data);
-		// 	//console.log(this.responseText);
-		// 	for (let i = 0; i < data.length; i++)
-		// 	{
-		// 		//Recipe
-		// 		console.log(data);
-		// 		let recipe = document.createElement("div");
-		// 		let recipeText = document.createTextNode(data[i]);
-		// 		recipe.appendChild(recipeText);
-		// 		document.querySelector("#recipe").appendChild(recipe);
-		// 	}
+		// 	data.forEach(results=>{console.log(results.ingredients);})
 		// }
+		if (request.status == 200)
+		{
+			results = data.results;
+			console.log(results);
+			console.log(this.responseText);
+			for (let i = 0; i < results.length; i++)
+			{
+				//Recipe
+				console.log(results[i].ingredients);
+				let recipe = document.createElement("form");
+				let recipeText = document.createTextNode(results[i].title);
+				recipe.appendChild(recipeText);
+				document.querySelector("#radio").appendChild(recipe);
+			}
+		}
 		else
 		{
 		 	console.log("ERROR");
@@ -78,8 +80,7 @@ function findRecipe()
 	request.send();
 }
 
-
-	//Function for selecting a food in dropdown
+//Function for selecting a food in dropdown
 function itemSelected()
 {
 	let data = null;
