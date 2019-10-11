@@ -6,8 +6,37 @@
     <link rel="stylesheet" type="text/css" href="style.css">
   </head>
   <body>
+    <h1>Recipe Search & Calorie Count</h1>
+    <br>
+
+    <!-- Recipe API, TextBox, Recipe display, Radio Buttons -->
+    <label>Enter an ingredient</label>
+    <input type="text" id="recipeBox"></input>
+    <button id="searchButton" onclick="findRecipe();">GO</button>
+    <br>
+    <br>
+    <div id="recipe"></div>
+    <!-- <input type="radio" id="recipe">
+    <input type= "submit"> -->
+    <br>
+    <br>
 
 
+
+    <!--Nutritional API, Dropdown, Table -->
+    <label>Select a food to see nutritional values:</label>
+      <select id="foodList" onchange="itemSelected();"></select>
+      <div id="food"></div>
+      </br>
+      </br>
+      <table style="display:none;" id="foodTable" >
+        <th  id="foodHead">
+          <td><b>Calories</b></td>
+          <td><b>Carbs</b></td>
+          <td><b>Total Sugar</b></td>
+        </th>
+        <tr id="foodbody"></tr>
+      </table>
     <script src="TwoAPIs.js" defer></script>
   </body>
 </html>
