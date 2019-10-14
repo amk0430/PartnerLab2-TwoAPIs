@@ -3,7 +3,13 @@ td {
   padding:5px;
 }
 
-head {
-  color: lightblue;
-  font-size: 20px;
+* {
+  background-color: lightblue;
+}
+
+h1{
+  font-size: 25px;
+}
+body {
+    font-size: 20px;
 }

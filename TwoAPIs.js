@@ -1,7 +1,8 @@
 let searchWord = "";
 let ingrData = "";
+let ingrd = "";
 
-//Ingredient search
+//Recipe search
 function findRecipe()
 {
 	let data = null;
@@ -9,10 +10,10 @@ function findRecipe()
 	searchWord = document.querySelector("#recipeBox").value;
 
 	console.log("Search word: " + searchWord);
-	request.open("GET",  "https://recipe-puppy.p.rapidapi.com/?i=" + searchWord, true);
+	request.open("GET",  "https://recipe-puppy.p.rapidapi.com/?q=" + searchWord, true);
 	request.setRequestHeader("x-rapidapi-host", "recipe-puppy.p.rapidapi.com");
 	request.setRequestHeader("x-rapidapi-key", "636f281abemshf2f10570570279dp10170ajsn3c5b24fe3431");
-
+//Pass in the recipe name using q=recipename to get all the ingredients,
 	request.onload = function() {
 		data = JSON.parse(this.response);
 		if (request.status == 200)
@@ -22,8 +23,9 @@ function findRecipe()
 			console.log(this.responseText);
 			for (let i = 0; i < results.length; i++)
 			{
-				//Recipe
+
 				console.log(results[i].ingredients);
+				ingrd = results[i].ingredients;
 				let recipe = document.createElement("button");
 				recipe.setAttribute('onclick', 'radioChoice();');
 				let recipeText = document.createTextNode(results[i].title);
@@ -45,33 +47,20 @@ function radioChoice()
 	document.querySelector("#checkButtons").style.display = "block";
 	console.log("Got to radioCHoice function");
 	let yes = document.querySelector("#yes").checked;
-	// let no = document.querySelector("#no").checked;
 		if (yes)
 		{
 			document.querySelector("#dropdownBox").style.display = "block";
 			getDropdown();
-			// testFunction();
 		}
-		// if (no)
-		// {
-		//
-		// 	document.querySelector("#noAnswer").innerHTML = "Ok bye!";
-		// 	document.querySelector("#noAnswer").style.display = "block";
-		//}
 }
-
-// function testFunction()
-// {
-// 		console.log("this function works");
-// }
-
 
 //Function for selecting a food in dropdown
 function getDropdown()
 {
 	// let keyword = document.querySelector("#recipeList").value;
+	let ingrd1 = ingrd[0].value;
 	let request = new XMLHttpRequest();
-	request.open("GET", "https://food-calorie-data-search.p.rapidapi.com/api/search?keyword=" + searchWord, true);
+	request.open("GET", "https://food-calorie-data-search.p.rapidapi.com/api/search?keyword=" + ingrd1, true);
 	request.setRequestHeader("x-rapidapi-host", "food-calorie-data-search.p.rapidapi.com");
 	request.setRequestHeader("x-rapidapi-key", "636f281abemshf2f10570570279dp10170ajsn3c5b24fe3431");
 	request.onload = function() {
