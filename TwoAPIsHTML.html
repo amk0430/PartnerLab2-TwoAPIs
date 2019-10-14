@@ -16,24 +16,35 @@
     <br>
     <br>
     <legend>Choose a Recipe</legend>
-    <div id="recipeList" onclick="getDropdown();"></div>
+    <div id="recipeList"></div>
+    <br>
+    <p id="noAnswer" style="display:none;">placeholder text</p>
+    <div id="checkButtons" style="display:none;">
+      <label>Would you like to see Nutritional values?</label>
+      <input type= radio name="yes" id="yes">Yes</input>
+      <input type= radio name="no" id="no">No</input>
+      <button id="choiceButton" onclick="radioChoice();">Submit</button>
+    </div>
+    <!--  //onclick="getDropdown();" -->
     <br>
     <br>
 
     <!--Nutritional API, Dropdown, Table -->
-    <label>Select a food to see nutritional values:</label>
-      <select id="foodList" onchange="itemSelected();"></select>
-      <div id="food"></div>
-      </br>
-      </br>
-      <table style="display:none;" id="foodTable" >
-        <th  id="foodHead">
-          <td><b>Calories</b></td>
-          <td><b>Carbs</b></td>
-          <td><b>Total Sugar</b></td>
-        </th>
-        <tr id="foodbody"></tr>
-      </table>
+    <div id="dropdownBox" style="display:none;">
+      <label>Select a food to see nutritional values:</label>
+        <select id="foodList" onchange="itemSelected();"></select>
+        <div id="food"></div>
+        </br>
+        </br>
+        <table style="display:none;" id="foodTable" >
+          <th  id="foodHead">
+            <td><b>Calories</b></td>
+            <td><b>Carbs</b></td>
+            <td><b>Total Sugar</b></td>
+          </th>
+          <tr id="foodbody"></tr>
+        </table>
+      </div>
     <script src="TwoAPIs.js" defer></script>
   </body>
 </html>

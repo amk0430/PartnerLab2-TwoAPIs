@@ -1,8 +1,12 @@
+let searchWord = "";
+let ingrData = "";
+
+//Ingredient search
 function findRecipe()
 {
 	let data = null;
 	let request = new XMLHttpRequest();
-	let searchWord = document.querySelector("#recipeBox").value;
+	searchWord = document.querySelector("#recipeBox").value;
 
 	console.log("Search word: " + searchWord);
 	request.open("GET",  "https://recipe-puppy.p.rapidapi.com/?i=" + searchWord, true);
@@ -20,7 +24,8 @@ function findRecipe()
 			{
 				//Recipe
 				console.log(results[i].ingredients);
-				let recipe = document.createElement("p");
+				let recipe = document.createElement("button");
+				recipe.setAttribute('onclick', 'radioChoice();');
 				let recipeText = document.createTextNode(results[i].title);
 				recipe.appendChild(recipeText);
 				document.querySelector("#recipeList").appendChild(recipe);
@@ -34,29 +39,52 @@ function findRecipe()
 	request.send();
 }
 
+//Radio Buttons for yes/no option
+function radioChoice()
+{
+	document.querySelector("#checkButtons").style.display = "block";
+	console.log("Got to radioCHoice function");
+	let yes = document.querySelector("#yes").checked;
+	// let no = document.querySelector("#no").checked;
+		if (yes)
+		{
+			document.querySelector("#dropdownBox").style.display = "block";
+			getDropdown();
+			// testFunction();
+		}
+		// if (no)
+		// {
+		//
+		// 	document.querySelector("#noAnswer").innerHTML = "Ok bye!";
+		// 	document.querySelector("#noAnswer").style.display = "block";
+		//}
+}
+
+// function testFunction()
+// {
+// 		console.log("this function works");
+// }
+
+
 //Function for selecting a food in dropdown
 function getDropdown()
 {
-	let data = null;
-	let keyword = document.querySelector("#recipeList").value;
+	// let keyword = document.querySelector("#recipeList").value;
 	let request = new XMLHttpRequest();
-
-
-	//Accessing API
-	request.open("GET", "https://food-calorie-data-search.p.rapidapi.com/api/search?keyword=" + keyword, true);
+	request.open("GET", "https://food-calorie-data-search.p.rapidapi.com/api/search?keyword=" + searchWord, true);
 	request.setRequestHeader("x-rapidapi-host", "food-calorie-data-search.p.rapidapi.com");
 	request.setRequestHeader("x-rapidapi-key", "636f281abemshf2f10570570279dp10170ajsn3c5b24fe3431");
 	request.onload = function() {
-	data = JSON.parse(this.response);
+	ingrData = JSON.parse(this.response);
 	if (request.status == 200)
 	{
 		console.log(this.responseText);
-		for (let i = 0; i < data.length; i++)
+		for (let i = 0; i < ingrData.length; i++)
 		{
 			//Nutritional
-			console.log(data[i].shrt_desc);
+			console.log(ingrData[i].shrt_desc);
     	let food = document.createElement("option");
-  		let foodText = document.createTextNode(data[i].shrt_desc);
+  		let foodText = document.createTextNode(ingrData[i].shrt_desc);
 	   	food.appendChild(foodText);
 	   	document.querySelector("#foodList").appendChild(food);
 		}
@@ -74,10 +102,10 @@ function itemSelected()
 {
 	//Table
   let selectedIndex = document.querySelector("#foodList").selectedIndex;
-  let foodName = data[selectedIndex].shrt_desc;
-  let calories = data[selectedIndex].energ_kcal;
-  let carbs = data[selectedIndex].carbohydrt;
-  let sugar = data[selectedIndex].sugar_tot;
+  let foodName = ingrData[selectedIndex].shrt_desc;
+  let calories = ingrData[selectedIndex].energ_kcal;
+  let carbs = ingrData[selectedIndex].carbohydrt;
+  let sugar = ingrData[selectedIndex].sugar_tot;
 
   var newFoodHead = document.createElement("td");
   var foodHeadText = document.createTextNode("Food Name");
